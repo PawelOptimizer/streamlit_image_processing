@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from openai import OpenAI
 import base64
-from utils import get_image_description
+from utils import get_image_description, get_secret
 
 # Streamlit app layout
 st.title("Image Description using GPT-4o and GPT-4o Mini")
@@ -11,7 +11,10 @@ st.write("Upload an image and get a description using GPT-4o or GPT-4o Mini.")
 # Textbox for updating OpenAI API key
 api_key = st.text_input("Enter your OpenAI API key", type="password")
 if not api_key:
-    api_key = os.environ.get("OPENAI_API_KEY", "")
+    # Retrieve the secrets
+    secrets = get_secret()
+    # Set the OpenAI API key
+    api_key = secrets['openAI_key_warsztaty_PW_2024']
 
 if api_key:
     # Initialize the OpenAI client
@@ -29,7 +32,7 @@ if api_key:
     if uploaded_file is not None:
         try:
             # Display the uploaded image
-            st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
+            st.image(uploaded_file, caption='Uploaded Image.', use_container_width=True)
             st.write("")
             st.write("Classifying...")
 

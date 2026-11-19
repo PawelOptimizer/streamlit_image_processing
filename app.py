@@ -10,7 +10,8 @@ DEFAULT_PROMPT = (
     "Describe what you see in this image in simple language. "
     "Mention key objects, scene, and possible context."
 )
-FALLBACK_MODELS = ["gpt-4.1-mini", "gpt-4.1-nano"]
+FALLBACK_MODELS = ["gpt-6-luna", "gpt-6.1-terra", "gpt-6.2-sol"]
+DEFAULT_MODEL = "gpt-6-luna"
 
 def get_secret(name, default=""):
     try:
@@ -72,7 +73,7 @@ if api_key:
         available_models = FALLBACK_MODELS
         st.warning("No GPT models were returned by the API. Using fallback model list.")
 
-    default_model = "gpt-4.1-mini" if "gpt-4.1-mini" in available_models else available_models[0]
+    default_model = DEFAULT_MODEL if DEFAULT_MODEL in available_models else available_models[0]
     default_index = available_models.index(default_model)
     model_choice = st.selectbox("Select model", available_models, index=default_index)
     custom_model = st.text_input(
@@ -91,7 +92,7 @@ if api_key:
 
     if uploaded_file is not None:
         try:
-            st.image(uploaded_file, caption="Uploaded image", use_container_width=True)
+            st.image(uploaded_file, caption="Uploaded image", width="stretch")
 
             if st.button("Analyze image", type="primary"):
                 if "request_timestamps" not in st.session_state:

@@ -22,7 +22,8 @@ def get_image_description(client, uploaded_file, prompt, model_choice):
                 ],
             }
         ],
-        max_tokens=300,
+        # Reasoning models count hidden reasoning tokens toward this limit, so keep it generous
+        max_completion_tokens=2000,
     )
 
     return response.choices[0].message.content

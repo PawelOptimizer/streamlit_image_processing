@@ -5,7 +5,7 @@ Upload an image, edit a prompt, and get a basic description from OpenAI vision-c
 Current app features:
 - image upload (`jpg`, `jpeg`, `png`, `webp`)
 - prompt editing with default prompt
-- model selection (`gpt-4.1-mini`, `gpt-4.1-nano`)
+- model selection (`gpt-6-luna`, `gpt-6.1-terra`, `gpt-6.2-sol`)
 - optional custom model override
 
 ## Local deployment
